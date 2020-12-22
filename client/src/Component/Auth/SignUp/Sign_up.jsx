@@ -1,6 +1,8 @@
 import React from "react";
 import svg from "../../../img/form-svg.svg";
+import useSignUp from "../../../CustomHook/Signup_hook";
 function Sign_up() {
+  const { handleChange, state } = useSignUp();
   return (
     <div className="signup-wrapper">
       <div className="img-wrapper">
@@ -20,7 +22,12 @@ function Sign_up() {
         <form action="">
           <div>
             <label htmlFor="username">UserName</label>
-            <input type="text" required placeholder="enter your username" />
+            <input
+              type="text"
+              required
+              placeholder="enter your username"
+              onChange={handleChange}
+            />
           </div>
           <div>
             <label htmlFor="email">Email</label>

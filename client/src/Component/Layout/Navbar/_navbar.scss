@@ -1,0 +1,41 @@
+nav {
+  background-color: $primary;
+  min-height: 8vh;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $neutral;
+
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: end;
+
+    li {
+      margin: 0 2em;
+      padding: 0.5em 1.2em;
+      a {
+        text-decoration: none;
+        color: $neutral;
+      }
+    }
+    .signup {
+      background: $primary2;
+    }
+    .signin {
+      background: $secondary;
+    }
+    li:hover {
+      background: lighten($color: $primary, $amount: 20%);
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  nav {
+    .auth-nav {
+      display: none;
+    }
+  }
+}

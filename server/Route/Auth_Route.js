@@ -1,9 +1,10 @@
 const express = require('express')
 const User = require('../Module/SignUp_module')
 const bcrypt = require('bcryptjs')
-const { findOne } = require('../Module/SignUp_module')
+
 const Route = express.Router()
 const jwt = require('jsonwebtoken')
+const Auth = require('../Middleware/Auth')
 
 Route.get('/',(req, res)=>{
     res.json([{}])
@@ -50,6 +51,7 @@ catch(err){
 })
 
 Route.post('/login',async(req, res)=>{
+
    try{
      const {email, password} = req.body
      const findUser = await User.findOne({email:email})
@@ -74,6 +76,10 @@ Route.post('/login',async(req, res)=>{
    catch(err){
      res.status(400).json({mssg:err.message})
    }
+})
+
+Route.delete('/delete',Auth,async(req,res)=>{
+
 })
 
 

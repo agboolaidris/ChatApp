@@ -8,6 +8,7 @@ const useSignUp = (SignUp, Validation)=>{
       password2:''
   })
   const [error, seterror] = useState({})
+  const [boolean, setboolean] = useState(false)
 
   const handleChange = (e)=>{
       setstate({
@@ -21,15 +22,18 @@ const useSignUp = (SignUp, Validation)=>{
   }, [error])
 
   const app = ()=>{
-      console.log(error)
+      
+      if(boolean){
     if(Object.keys(error).length === 0 && error.constructor === Object){
           SignUp(state)  
         }
+    }
   }
 
   const handleSubmit = (e)=>{
       e.preventDefault()
       seterror(Validation(state))
+      setboolean(true)
     
 }
 

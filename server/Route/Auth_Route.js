@@ -52,7 +52,7 @@ catch(err){
 Route.post('/login',async(req, res)=>{
    try{
      const {email, password} = req.body
-     const findUser = await findOne({email:email})
+     const findUser = await User.findOne({email:email})
      if(!findUser){
        res.status(400).json({mssg:'no such account have been created yet'})
      }
@@ -62,7 +62,14 @@ Route.post('/login',async(req, res)=>{
        res.status(400).json({mssg:'incorrect password'})
      }
 
-     const token = jwt.sign({id:findUser._id})
+     const token = jwt.sign({id:findUser._id}, process.env.JWT_SECRET)
+     res.json({
+       token,
+       user:{
+         email:findUser.email,
+         userName:findUser.userName
+       }
+     })
    }
    catch(err){
      res.status(400).json({mssg:err.message})

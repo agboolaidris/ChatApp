@@ -13,6 +13,7 @@ Route.get('/',(req, res)=>{
 Route.post('/register',async(req,res)=>{
   try{ 
    const {userName, email, password } = req.body
+   
     const user_email = await User.findOne({email:email})
   if(user_email){
     return res.json({mssg:'the email have already exist'})
@@ -23,7 +24,7 @@ Route.post('/register',async(req,res)=>{
     return res.json({mssg:'the username have already exist'})
   }
 
-  const salt =await bcrypt.genSalt()
+  const salt = await bcrypt.genSalt()
   const genPassword = await bcrypt.hash(password, salt)
   console.log(genPassword)
 
@@ -54,7 +55,9 @@ Route.post('/login',async(req, res)=>{
 
    try{
      const {email, password} = req.body
+
      const findUser = await User.findOne({email:email})
+
      if(!findUser){
        res.status(400).json({mssg:'no such account have been created yet'})
      }
@@ -79,6 +82,18 @@ Route.post('/login',async(req, res)=>{
 })
 
 Route.delete('/delete',Auth,async(req,res)=>{
+ try { const user_id = req.user
+    await  User.findByIdAndDelete(user_id)
+    .then(()=>{
+       res.json({mssg:'user deleted'})
+    })
+    .catch((err)=>{
+         res.status(401).json({mssg:err})
+    })
+  }
+  catch(err){
+       res.status(401).json({mssg:err.message})
+  }
 
 })
 

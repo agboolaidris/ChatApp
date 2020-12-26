@@ -1,13 +1,24 @@
 const express = require('express')
 const User = require('../Module/SignUp_module')
 const bcrypt = require('bcryptjs')
-
 const Route = express.Router()
 const jwt = require('jsonwebtoken')
 const Auth = require('../Middleware/Auth')
 
-Route.get('/',(req, res)=>{
-    res.json([{}])
+
+Route.get('/',Auth, async(req, res)=>{
+   try {
+      User.findById(req.user)
+    .then((user)=>{
+          res.json(user) 
+        })
+        .catch((err)=>{
+          res.json({mssg:err})
+        })
+  }
+  catch(err){
+      res.json({mssg:err.message})
+  }
 })
 
 Route.post('/register',async(req,res)=>{
@@ -96,6 +107,33 @@ Route.delete('/delete',Auth,async(req,res)=>{
   }
 
 })
+
+Route.post('/tokenIsValid',async(req,res)=>{
+ try {
+   const token = req.header('token')
+    if(!token){
+      res.json(false)
+    }
+
+    const verified = jwt.verify(token,process.env.JWT_SECRET)
+    if(!verified){
+      res.json(false)
+    }
+
+    const user = User.findById(verified.id)
+     if(!user){
+       res.json(false)
+     } 
+
+     res.json(true)
+  }
+  catch(err){
+    res.status(401).json({mssg:err.message})
+  }
+
+})
+
+
 
 
 

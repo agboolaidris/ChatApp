@@ -88,7 +88,7 @@ function Sign_up({ SignUp }) {
 
         <div className="forget-password">
           <p>
-            Already have an account <Link to="/">SignIn</Link>
+            Already have an account <Link to="/login">SignIn</Link>
           </p>
           <p>
             <Link to="/">forget Password</Link>

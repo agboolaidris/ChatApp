@@ -9,8 +9,9 @@ function Navbar({ CheckLogin, user }) {
   }, []);
   const logout = () => {
     localStorage.setItem("token", "");
+    window.location.reload();
   };
-  const [isLogIn, setisLogIn] = useState(false);
+
   return (
     <nav>
       <span className="logo">The LOGO</span>

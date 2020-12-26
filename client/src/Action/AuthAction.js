@@ -1,5 +1,5 @@
 import axios  from 'axios'
-import {CHECK_LOGIN} from './type'
+import {CHECK_LOGIN, LOGIN} from './type'
 
 export const CheckLogin =()=>{
   return async(dispatch)=>{
@@ -11,16 +11,16 @@ if(token === null){
   }
 
    const tokenRes = await axios.post('http://localhost:5000/user/tokenIsValid',null,{headers:{'token':token}})
-    
    if(tokenRes.data){
-      axios.get('http://localhost:5000/user',null,{headers:{'token':token}})
+      axios.get('http://localhost:5000/user',{headers:{'token':token}})
        .then(res=>{
          console.log(res)
-        dispatch({action:CHECK_LOGIN, payload:res.data, token:token})
+        dispatch({type:CHECK_LOGIN, payload:res.data, token:token})
        }
        )
        .catch(err=>{
          console.log(err)
+
        })
       
     }
@@ -28,11 +28,18 @@ if(token === null){
 }
 
 export const SignUp = (user)=>{
-    console.log(user)
+  
     return(dispatch)=>{
      axios.post('http://localhost:5000/user/register', user)
      .then((res)=>{
-       console.log(res)
+      axios.post('http://localhost:5000/user/login', user)
+      .then(res=>{
+       localStorage.setItem('token', res.data.token)
+       dispatch({type:LOGIN, payload:res.data.user})
+      })
+      .catch(err=>{
+        console.log(err)
+      })
      })
      .catch((err)=>{
        console.log(err)

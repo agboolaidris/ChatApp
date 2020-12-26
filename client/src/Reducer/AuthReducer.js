@@ -1,4 +1,4 @@
-import {CHECK_LOGIN, CHECK_LOGIN_ERR} from '../Action/type'
+import {CHECK_LOGIN,CHECK_LOGIN_ERR,  LOGIN} from '../Action/type'
 const initialState = {
     token:'',
     user:{},
@@ -21,6 +21,10 @@ switch(action.type){
                 user:action.payload
             }
             break;
+        case LOGIN :
+            return {
+                user:action.payload
+            }   
     default:
         return state
         break;

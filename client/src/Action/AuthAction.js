@@ -51,7 +51,9 @@ export const login = (user)=>{
   return async dispatch=>{
        await axios.post('http://localhost:5000/user/login', user)
        .then(res=>{
-         console.log(res)
+         console.log(res.data.user)
+         localStorage.setItem('token',res.data.token)
+         dispatch({type:LOGIN, payload:res.data.user, token:res.date.token})
        })
        .catch(err=>{
          console.log(err)

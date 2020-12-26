@@ -13,10 +13,10 @@ function Sign_up({ SignUp, user }) {
     Validation
   );
 
-  const [states, setstates] = useState(false);
+  const token = localStorage.getItem("token");
   return (
     <div className="signup-wrapper">
-      {user ? (
+      {token ? (
         <Redirect to="/" />
       ) : (
         <>

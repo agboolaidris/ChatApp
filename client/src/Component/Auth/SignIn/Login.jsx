@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { login } from "../../../Action/AuthAction";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 function Login({ login }) {
   const [state, setstate] = useState({
@@ -20,31 +21,39 @@ function Login({ login }) {
     login(state);
   };
 
+  const token = localStorage.getItem("token");
+
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="">Email</label>
-          <input
-            type="email"
-            value={state.email}
-            id="email"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="">password</label>
-          <input
-            type="password"
-            value={state.password}
-            id="password"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button>Login</button>
-      </form>
+      {token ? (
+        <Redirect to="/" />
+      ) : (
+        <>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="">Email</label>
+              <input
+                type="email"
+                value={state.email}
+                id="email"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="">password</label>
+              <input
+                type="password"
+                value={state.password}
+                id="password"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button>Login</button>
+          </form>
+        </>
+      )}
     </div>
   );
 }

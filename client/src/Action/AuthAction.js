@@ -1,4 +1,5 @@
 import axios  from 'axios'
+import {CHECK_LOGIN} from './type'
 
 export const CheckLogin =()=>{
   return async(dispatch)=>{
@@ -15,9 +16,12 @@ if(token === null){
       axios.get('http://localhost:5000/user',null,{headers:{'token':token}})
        .then(res=>{
          console.log(res)
-        dispatch({action:'CHECK_LOGIN', payload:res.data, token:token})
+        dispatch({action:CHECK_LOGIN, payload:res.data, token:token})
        }
        )
+       .catch(err=>{
+         console.log(err)
+       })
       
     }
 }

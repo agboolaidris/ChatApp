@@ -2,18 +2,24 @@ import axios  from 'axios'
 
 export const CheckLogin =()=>{
   return async(dispatch)=>{
-  let token =  localStorage.getItem('token')
-  if(token === null){
+let token =  localStorage.getItem('token')
+
+if(token === null){
     localStorage.setItem('token',"")
    token = ""
   }
-  await axios.post('http://localhost:5000/user/tokenIsValid',null,{headers:{'token':token}})
-  .then((res)=>{
-    console.log(res)
-  })
-  .catch((err)=>{
-    console.log(err)
-  })
+
+   const tokenRes = await axios.post('http://localhost:5000/user/tokenIsValid',null,{headers:{'token':token}})
+    
+   if(tokenRes.data){
+      axios.get('http://localhost:5000/user',null,{headers:{'token':token}})
+       .then(res=>{
+         console.log(res)
+        dispatch({action:'CHECK_LOGIN', payload:res.data, token:token})
+       }
+       )
+      
+    }
 }
 }
 

@@ -29,10 +29,10 @@ if(token === null){
 
 export const SignUp = (user)=>{
   
-    return(dispatch)=>{
-     axios.post('http://localhost:5000/user/register', user)
-     .then((res)=>{
-      axios.post('http://localhost:5000/user/login', user)
+    return async(dispatch)=>{
+    await axios.post('http://localhost:5000/user/register', user)
+     .then(async(res)=>{
+     await axios.post('http://localhost:5000/user/login', user)
       .then(res=>{
        localStorage.setItem('token', res.data.token)
        dispatch({type:LOGIN, payload:res.data.user})
@@ -45,5 +45,17 @@ export const SignUp = (user)=>{
        console.log(err)
      })
     }
+}
+
+export const login = (user)=>{
+  return async dispatch=>{
+       await axios.post('http://localhost:5000/user/login', user)
+       .then(res=>{
+         console.log(res)
+       })
+       .catch(err=>{
+         console.log(err)
+       })
+  }
 }
 

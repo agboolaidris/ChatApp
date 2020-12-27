@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import svg from "../../../img/form-svg.svg";
 import useSignUp from "../../../CustomHook/Signup_hook";
 import { Link } from "react-router-dom";
@@ -12,6 +12,13 @@ function Sign_up({ Register, isAuthenicated, Error }) {
     Validation,
     Error
   );
+  const [serverError, setserverError] = useState("");
+
+  useEffect(() => {
+    if (Error.id === "RESGISTRATION FAIL") {
+      setserverError(Error.mssg.mssg);
+    }
+  }, [Error]);
 
   return (
     <div className="signup-wrapper">
@@ -25,6 +32,7 @@ function Sign_up({ Register, isAuthenicated, Error }) {
           Get started with us today! create an Account by filling out the form
           below.
         </h2>
+        <h1>{serverError}</h1>
 
         <div className="social-auth">
           <button className="facebook">Facebook</button>

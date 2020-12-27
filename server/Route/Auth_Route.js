@@ -26,18 +26,18 @@ Route.post('/register',async(req,res)=>{
    const {userName, email, password } = req.body
    
     const user_email = await User.findOne({email:email})
-  if(user_email){
-    return res.json({mssg:'the email have already exist'})
-  }
+     if(user_email){
+       return res.status(400).json({mssg:'the email have already exist'})
+    }
 
-  const user_userName = await User.findOne({userName:userName}) 
-  if(user_userName){
-    return res.json({mssg:'the username have already exist'})
-  }
+     const user_userName = await User.findOne({userName:userName}) 
+      if(user_userName){
+      return res.status(400).json({mssg:'the username have already exist'})
+     }
 
-  const salt = await bcrypt.genSalt()
-  const genPassword = await bcrypt.hash(password, salt)
-  console.log(genPassword)
+     const salt = await bcrypt.genSalt()
+     const genPassword = await bcrypt.hash(password, salt)
+     console.log(genPassword)
 
   const new_user = new User({
      userName:userName,
@@ -93,7 +93,8 @@ Route.post('/login',async(req, res)=>{
 })
 
 Route.delete('/delete',Auth,async(req,res)=>{
- try { const user_id = req.user
+ try { 
+   const user_id = req.user
     await  User.findByIdAndDelete(user_id)
     .then(()=>{
        res.json({mssg:'user deleted'})

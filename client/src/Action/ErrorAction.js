@@ -1,7 +1,7 @@
 import {CLEAR_ERROR,GET_ERROR} from './type'
 
 //GET ERROR
-export const getError = (mssg,status,id=null)=>{
+export const getError = (mssg, status, id=null)=>{
     return dispatach =>{
       dispatach({type:GET_ERROR, payload:{mssg, status, id}})
     }

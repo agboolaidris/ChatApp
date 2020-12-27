@@ -6,10 +6,7 @@ function Navbar({ CheckLogin, token, logout }) {
   useEffect(() => {
     //  CheckLogin();
   }, []);
-  const Logout = () => {
-    logout();
-    localStorage.setItem("token", "");
-  };
+  const Logout = () => {};
 
   return (
     <nav>

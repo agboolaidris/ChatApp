@@ -1,5 +1,5 @@
 import axios  from 'axios';
-import {REGISTER_SUCCESSFUL,LOGOUT_SUCCESSFUL,LOGIN_SUCCESSFUL,USER_LOADING,USER_LOADED,AUTH_ERROR} from './type'
+import {REGISTER_SUCCESSFUL,LOGOUT_SUCCESSFUL,LOGIN_SUCCESSFUL,USER_LOADING,USER_LOADED,AUTH_ERROR, LOGIN_ERROR, REGISTER_ERROR} from './type'
 import {getError} from './ErrorAction'
 
 export const LoadUser = ()=>{
@@ -37,17 +37,19 @@ export const Register = (user)=>{
     return async(dispatch)=>{
     await axios.post('http://localhost:5000/user/register', user)
      .then(async(res)=>{
-     await axios.post('http://localhost:5000/user/login', user)
+      
+      await axios.post('http://localhost:5000/user/login', user)
       .then(res=>{
-       localStorage.setItem('token', res.data.token)
        dispatch({type:LOGIN_SUCCESSFUL, payload:res.data})
       })
       .catch(err=>{
-        console.log(err)
+        dispatch(getError(err.response.status, err.response.data))
+        dispatch({type:LOGIN_ERROR})
       })
      })
      .catch((err)=>{
-       console.log(err)
+       dispatch(getError(err.response.data, err.response.status, 'RESGISTRATION FAIL'))
+       dispatch({type:REGISTER_ERROR})
      })
     }
 }

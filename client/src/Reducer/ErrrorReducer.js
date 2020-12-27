@@ -23,7 +23,7 @@ const ErrorReducer = (state=initialstate, action)=>{
             
     
         default:
-            state
+           return state
             break;
     }
 }

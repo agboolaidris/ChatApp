@@ -11,6 +11,6 @@ export const getError = (mssg,status,id=null)=>{
 //CLEAR ERROR
 export const clearError = ()=>{
     return dispatach=>{
-        dispatach({type:CLEAR_ERROR, payload:{}})
+        dispatach({type:CLEAR_ERROR})
     }
 }

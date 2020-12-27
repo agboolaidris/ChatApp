@@ -2,23 +2,16 @@ import React, { useEffect } from "react";
 import svg from "../../../img/form-svg.svg";
 import useSignUp from "../../../CustomHook/Signup_hook";
 import { Link } from "react-router-dom";
-import { SignUp } from "../../../Action/AuthAction";
+import { Register } from "../../../Action/AuthAction";
 import { connect } from "react-redux";
 import Validation from "./Val_SignUp";
-import { useHistory } from "react-router-dom";
 
-function Sign_up({ SignUp, token }) {
-  const history = useHistory();
+function Sign_up({ Register, isAuthenicated, Error }) {
   const { handleChange, state, handleSubmit, error } = useSignUp(
-    SignUp,
+    Register,
     Validation,
-    history
+    Error
   );
-  useEffect(() => {
-    if (token) {
-      history.push("/");
-    }
-  }, []);
 
   return (
     <div className="signup-wrapper">
@@ -110,8 +103,9 @@ function Sign_up({ SignUp, token }) {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.Auth.token,
+    isAuthenicated: state.Auth.isAuthenicated,
+    Error: state.Error,
   };
 };
 
-export default connect(mapStateToProps, { SignUp })(Sign_up);
+export default connect(mapStateToProps, { Register })(Sign_up);

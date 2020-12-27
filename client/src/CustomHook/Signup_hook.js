@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-const useSignUp = (SignUp, Validation, history)=>{
+const useSignUp = (SignUp, Validation,)=>{
   const [state, setstate] = useState({
       userName:'',
       email:'',
@@ -34,7 +34,7 @@ const useSignUp = (SignUp, Validation, history)=>{
       e.preventDefault()
       seterror(Validation(state))
       setboolean(true)
-      history.push('/')
+    
     
 }
 

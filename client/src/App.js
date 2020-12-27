@@ -4,8 +4,13 @@ import Login from './Component/Auth/SignIn/Login';
 import Sign_up from './Component/Auth/SignUp/Sign_up'
 import Dashboard from './Component/Dashboard/Dashboard';
 import Navbar from './Component/Layout/Navbar/Navbar'
-import {CheckLogin } from './Action/AuthAction'
-function App() {
+import {LoadUser } from './Action/AuthAction' 
+import { connect } from 'react-redux';
+function App({LoadUser}) {
+
+  useEffect(() => {
+     LoadUser()
+  }, [])
 
   return (
     <div className="App">
@@ -21,4 +26,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null,{LoadUser})(App);

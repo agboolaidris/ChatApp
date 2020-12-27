@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
-import { CheckLogin } from "../../Action/AuthAction";
+//import { CheckLogin } from "../../Action/AuthAction";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 function Dashboard({ CheckLogin, token }) {
   useEffect(() => {
-    CheckLogin();
+    // CheckLogin();
   }, []);
 
   const history = useHistory();
   useEffect(() => {
-    console.log(token);
     if (!token) {
       history.push("/");
     }
@@ -32,4 +31,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { CheckLogin })(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

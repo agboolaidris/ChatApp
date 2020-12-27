@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Auth_nav from "./Auth_nav";
 import { connect } from "react-redux";
-import { CheckLogin, logout } from "../../../Action/AuthAction";
 
 function Navbar({ CheckLogin, token, logout }) {
-  console.log(token);
   useEffect(() => {
-    CheckLogin();
+    //  CheckLogin();
   }, []);
   const Logout = () => {
     logout();
@@ -27,4 +25,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { CheckLogin, logout })(Navbar);
+export default connect(mapStateToProps, {})(Navbar);

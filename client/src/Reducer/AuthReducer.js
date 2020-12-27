@@ -1,30 +1,44 @@
-import {CHECK_LOGIN,CHECK_LOGIN_ERR,  LOGIN} from '../Action/type'
+import {AUTH_ERROR,  LOGIN_SUCCESSFUL, LOGOUT_SUCCESSFUL,REGISTER_SUCCESSFUL,USER_LOADED, USER_LOADING} from '../Action/type'
 const initialState = {
-    token:'',
-    user:{},
+    token:localStorage.getItem('token'),
+    user:null,
+    isloading:false,
+    isAuthenticated:null
 }
 
 
 const AuthReducer = (state=initialState, action)=>{
 switch(action.type){
-    case CHECK_LOGIN:
-        console.log(action.token)
+    case USER_LOADING:
         return{
-            token:action.token,
-            user:action.payload
+            ...state,
+            isloading:true
         }
         break;
-        case CHECK_LOGIN_ERR:
-            console.log(action.token)
-            return{
-                token:action.token,
-                user:action.payload
-            }
-            break;
-        case LOGIN :
+     case USER_LOADED:
+         return{
+             ...state,
+             isloading:false,
+             isAuthenticated:true,
+             user:action.payload
+         }   
+        case LOGIN_SUCCESSFUL :
+         case REGISTER_SUCCESSFUL:   
             return {
-                user:action.payload
-            }   
+               ...action.payload,
+               isloading:false,
+               isAuthenticated:true,
+            }
+         case LOGOUT_SUCCESSFUL:
+             case AUTH_ERROR:
+                 localStorage.removeItem('token')
+             return{
+              ...state,
+              token:null,
+              user:null,
+              isAuthenticated:false,
+              isloading:false,
+             }      
     default:
         return state
         break;

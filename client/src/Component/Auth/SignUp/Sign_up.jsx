@@ -5,18 +5,21 @@ import { Link } from "react-router-dom";
 import { Register } from "../../../Action/AuthAction";
 import { connect } from "react-redux";
 import Validation from "./Val_SignUp";
+import { clearError } from "../../../Action/ErrorAction";
 
-function Sign_up({ Register, isAuthenicated, Error }) {
+function Sign_up({ Register, isAuthenicated, Error, clearError }) {
   const { handleChange, state, handleSubmit, error } = useSignUp(
     Register,
     Validation,
-    Error
+    clearError
   );
   const [serverError, setserverError] = useState("");
 
   useEffect(() => {
     if (Error.id === "RESGISTRATION FAIL") {
       setserverError(Error.mssg.mssg);
+    } else {
+      setserverError("");
     }
   }, [Error]);
 
@@ -32,7 +35,6 @@ function Sign_up({ Register, isAuthenicated, Error }) {
           Get started with us today! create an Account by filling out the form
           below.
         </h2>
-        <h1>{serverError}</h1>
 
         <div className="social-auth">
           <button className="facebook">Facebook</button>
@@ -40,6 +42,9 @@ function Sign_up({ Register, isAuthenicated, Error }) {
         </div>
 
         <form onSubmit={handleSubmit}>
+          <span className="span">
+            {error.mssg ? error.mssg : serverError && serverError}
+          </span>
           <div>
             <label htmlFor="userName">UserName</label>
             <input
@@ -50,7 +55,6 @@ function Sign_up({ Register, isAuthenicated, Error }) {
               id="userName"
               onChange={handleChange}
             />
-            <span className="span">{error.userName && error.userName}</span>
           </div>
           <div>
             <label htmlFor="email">Email</label>
@@ -62,7 +66,6 @@ function Sign_up({ Register, isAuthenicated, Error }) {
               value={state.email}
               onChange={handleChange}
             />
-            <span className="span">{error.email && error.email}</span>
           </div>
 
           <div>
@@ -75,7 +78,6 @@ function Sign_up({ Register, isAuthenicated, Error }) {
               id="password"
               onChange={handleChange}
             />
-            <span className="span">{error.password && error.password}</span>
           </div>
           <div>
             <label htmlFor="pasword2">Confirm Password</label>
@@ -87,7 +89,6 @@ function Sign_up({ Register, isAuthenicated, Error }) {
               value={state.password2}
               onChange={handleChange}
             />
-            <span className="span">{error.password2 && error.password2}</span>
           </div>
           <div>
             <input type="checkbox" className="checkbox" required />
@@ -116,4 +117,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { Register })(Sign_up);
+export default connect(mapStateToProps, { Register, clearError })(Sign_up);

@@ -1,33 +1,28 @@
 import React, { useEffect } from "react";
 //import { CheckLogin } from "../../Action/AuthAction";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
-function Dashboard({ CheckLogin, token }) {
-  useEffect(() => {
-    // CheckLogin();
-  }, []);
-
-  const history = useHistory();
-  useEffect(() => {
-    if (!token) {
-      history.push("/");
-    }
-  }, [token]);
-
+function Dashboard({ CheckLogin, auth }) {
+  const { isAuthenticated } = auth;
+  console.log(isAuthenticated);
   return (
     <div>
-      <>
-        <h1>Welcome Guest</h1>
-        <h2>Dashboard ..........</h2>
-      </>
+      {1 !== 1 ? (
+        <Redirect to="/login" />
+      ) : (
+        <>
+          <h1>Welcome Guest</h1>
+          <h2>Dashboard ..........</h2>
+        </>
+      )}
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    token: state.Auth.token,
+    auth: state.Auth,
   };
 };
 

@@ -12,10 +12,10 @@ export const LoadUser = ()=>{
         const token = getState().Auth.token
         console.log(token)
        if(token){
-         await axios.get('http/localhost:5000/user',{headers:{token:token}})
+         await axios.get('http://localhost:5000/user',{headers:{token:token}})
          .then(res=>{
           console.log(res)
-           dispatch({type:USER_LOADED,payload:res.payload})
+           dispatch({type:USER_LOADED,payload:res.data})
          })
          .catch(err=>{
            console.log(err)
@@ -61,17 +61,17 @@ export const login = (user)=>{
        .then(res=>{
         
          localStorage.setItem('token',res.data.token)
-         dispatch({type:LOGIN_SUCCESSFUL, payload:res.data.user, token:res.date.token})
+         dispatch({type:LOGIN_SUCCESSFUL, payload:res.data})
        })
        .catch(err=>{
-         console.log(err)
+        dispatch(getError(err.response.data,err.response.status, 'LOGIN FAIL'))
        })
   }
 }
 
 export const logout = ()=>{
   return (dispatch)=>{
-      dispatch({type:LOGOUT_SUCCESSFUL , payload:'', token:''})
+      dispatch({type:LOGOUT_SUCCESSFUL})
   }
 }
 

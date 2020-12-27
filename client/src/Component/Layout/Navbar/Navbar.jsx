@@ -1,25 +1,33 @@
 import React, { useState, useEffect } from "react";
 import Auth_nav from "./Auth_nav";
 import { connect } from "react-redux";
+import { logout } from "../../../Action/AuthAction";
 
-function Navbar({ CheckLogin, token, logout }) {
-  useEffect(() => {
-    //  CheckLogin();
-  }, []);
-  const Logout = () => {};
+function Navbar({ auth, logout }) {
+  const Logout = () => {
+    logout();
+  };
+  const { isAuthenticated, user } = auth;
 
   return (
     <nav>
       <span className="logo">The LOGO</span>
-      {token ? <button onClick={Logout}>Logout</button> : <Auth_nav />}
+      {isAuthenticated ? (
+        <>
+          <button onClick={Logout}>Logout</button>
+          <span>{user.userName && user.userName}</span>
+        </>
+      ) : (
+        <Auth_nav />
+      )}
     </nav>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    token: state.Auth.token,
+    auth: state.Auth,
   };
 };
 
-export default connect(mapStateToProps, {})(Navbar);
+export default connect(mapStateToProps, { logout })(Navbar);

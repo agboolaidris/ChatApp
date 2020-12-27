@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-const useSignUp = (SignUp, Validation, )=>{
+const useSignUp = (SignUp, Validation,clearError )=>{
   const [state, setstate] = useState({
       userName:'',
       email:'',
@@ -11,10 +11,12 @@ const useSignUp = (SignUp, Validation, )=>{
   const [boolean, setboolean] = useState(false)
    
   const handleChange = (e)=>{
+      clearError()
       setstate({
           ...state,
           [e.target.id]:e.target.value
       })
+    
    
   }
   useEffect(() => {

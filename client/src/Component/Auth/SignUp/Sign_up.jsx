@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import svg from "../../../img/form-svg.svg";
 import useSignUp from "../../../CustomHook/Signup_hook";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Register } from "../../../Action/AuthAction";
 import { connect } from "react-redux";
 import Validation from "./Val_SignUp";
 import { clearError } from "../../../Action/ErrorAction";
 
-function Sign_up({ Register, isAuthenicated, Error, clearError }) {
+function Sign_up({ Register, Error, clearError }) {
+  const history = useHistory();
   const { handleChange, state, handleSubmit, error } = useSignUp(
     Register,
     Validation,
-    clearError
+    clearError,
+    history
   );
   const [serverError, setserverError] = useState("");
 
@@ -112,7 +114,6 @@ function Sign_up({ Register, isAuthenicated, Error, clearError }) {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenicated: state.Auth.isAuthenicated,
     Error: state.Error,
   };
 };

@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-const useSignUp = (SignUp, Validation,clearError )=>{
+const useSignUp = (SignUp, Validation,clearError, history )=>{
   const [state, setstate] = useState({
       userName:'',
       email:'',
@@ -22,7 +22,8 @@ const useSignUp = (SignUp, Validation,clearError )=>{
   useEffect(() => {
     if(boolean){
       if(Object.keys(error).length === 0 && error.constructor === Object){
-         SignUp(state)  
+         SignUp(state) 
+         history.push('/') 
        }
    }
   }, [error])
@@ -34,6 +35,7 @@ const useSignUp = (SignUp, Validation,clearError )=>{
       e.preventDefault()
       seterror(Validation(state))
       setboolean(true)
+
     
     
 }

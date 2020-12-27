@@ -2,12 +2,8 @@ import {Route,Redirect} from 'react-router-dom'
 import React,{useEffect} from 'react'
 import {connect} from 'react-redux'
 
- function ProtectedRoute({component:Component,auth, ...rest}) {
-    console.log(auth)
-     
-     
-     const {isAuthenticated, token} = auth
-     console.log(isAuthenticated) 
+ function ProtectedRoute({component:Component,isAuthenticated,...rest}) {
+    console.log(isAuthenticated)
     
     
     return (
@@ -24,9 +20,5 @@ import {connect} from 'react-redux'
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-      auth: state.Auth,
-    };
-  };
-  export default connect(mapStateToProps) (ProtectedRoute)
+
+  export default ProtectedRoute

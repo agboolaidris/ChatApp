@@ -6,18 +6,21 @@ import Dashboard from './Component/Dashboard/Dashboard';
 import Navbar from './Component/Layout/Navbar/Navbar'
 import {LoadUser } from './Action/AuthAction' 
 import { connect } from 'react-redux';
+import ProtectedRoute from './ProtectedRoute';
+
 function App({LoadUser}) {
 
   useEffect(() => {
+    
      LoadUser()
-  }, [])
+  }, [LoadUser])
 
   return (
     <div className="App">
       <BrowserRouter>
       <Navbar />
       <Switch>
-        <Route exact path='/' component={Dashboard}/>
+        <ProtectedRoute exact path='/' component={Dashboard}/>
         <Route path='/login' component={Login} />
         <Route path='/register' component={Sign_up}/>
       </Switch>

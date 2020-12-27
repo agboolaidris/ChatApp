@@ -1,4 +1,4 @@
-import axios  from 'axios';
+import axios from 'axios'
 import {REGISTER_SUCCESSFUL,LOGOUT_SUCCESSFUL,LOGIN_SUCCESSFUL,USER_LOADING,USER_LOADED,AUTH_ERROR, LOGIN_ERROR, REGISTER_ERROR} from './type'
 import {getError} from './ErrorAction'
 
@@ -10,16 +10,14 @@ export const LoadUser = ()=>{
          dispatch({type:USER_LOADING})
          //get token from the local storage
         const token = getState().Auth.token
-        console.log(token)
+        
        if(token){
          await axios.get('http://localhost:5000/user',{headers:{token:token}})
          .then(res=>{
-          console.log(res)
-           dispatch({type:USER_LOADED,payload:res.data})
+          dispatch({type:USER_LOADED,payload:res.data})
          })
          .catch(err=>{
-           console.log(err)
-           dispatch(getError(err.response.data, err.response.status))
+          dispatch(getError(err.response.data, err.response.status))
              dispatch({type:AUTH_ERROR})
          })
        }
@@ -27,7 +25,7 @@ export const LoadUser = ()=>{
 
     }
     catch(err){
-      console.log(err)
+      console.log(err.response)
     }
   }
 }

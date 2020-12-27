@@ -20,6 +20,7 @@ function Login({ login, token }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(state);
+    history.push("/");
   };
 
   return (

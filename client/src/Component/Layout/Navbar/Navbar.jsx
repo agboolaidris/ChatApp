@@ -8,6 +8,7 @@ function Navbar({ auth, logout }) {
     logout();
   };
   const { isAuthenticated, user } = auth;
+  console.log(isAuthenticated);
 
   return (
     <nav>

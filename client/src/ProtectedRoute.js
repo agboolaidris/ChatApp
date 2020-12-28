@@ -1,24 +1,22 @@
 import {Route,Redirect} from 'react-router-dom'
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 
- function ProtectedRoute({component:Component,isAuthenticated,...rest}) {
-    console.log(isAuthenticated)
+ function ProtectedRoute({component:Component,...rest}) {
+     console.log(rest.isAuthenticated)
     
-    
-    return (
-        <Route {...rest} render={
+return ( !rest.isAuthenticated ? <Redirect to='/login' />  
+       : <Route {...rest} render={
             (props)=>{
-                if(isAuthenticated){
-                 return  <Component {...props} />
-                }
-                else{
-                     return <Redirect to='/login'/>
-                }
-            }
-        } />
-    )
+              return  (<Component {...props} /> )
+            }  } />
+        )
 }
+const mapStateToProps = (state) => {
+    return {
+      isAuthenticated: state.Auth.isAuthenticated,
+    };
+  };
+  
 
-
-  export default ProtectedRoute
+  export default connect(mapStateToProps) (ProtectedRoute)

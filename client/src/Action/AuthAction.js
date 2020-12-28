@@ -3,9 +3,8 @@ import {REGISTER_SUCCESSFUL,LOGOUT_SUCCESSFUL,LOGIN_SUCCESSFUL,USER_LOADING,USER
 import {getError} from './ErrorAction'
 
 export const LoadUser = ()=>{
-
   return async(dispatch, getState)=>{
-    try{  
+     try{  
       //user loading
          dispatch({type:USER_LOADING})
          //get token from the local storage
@@ -13,11 +12,12 @@ export const LoadUser = ()=>{
         
        if(token){
          await axios.get('http://localhost:5000/user',{headers:{token:token}})
-         .then(res=>{
+         .then(res=>{ console.log(res.data)
           dispatch({type:USER_LOADED,payload:res.data})
          })
          .catch(err=>{
           dispatch(getError(err.response.data, err.response.status))
+          console.log(err)
              dispatch({type:AUTH_ERROR})
          })
        }

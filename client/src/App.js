@@ -8,20 +8,17 @@ import {LoadUser } from './Action/AuthAction'
 import { connect } from 'react-redux';
 import ProtectedRoute from './ProtectedRoute';
 
-function App({LoadUser, auth}) {
-  console.log(auth.isAuthenticated)
-  const {isAuthenticated} = auth
-
-  useEffect(() => {
+function App({LoadUser}) {
+   useEffect(() => {
     LoadUser()
-  }, [LoadUser])
+  }, [])
 
   return (
     <div className="App">
       <BrowserRouter>
       <Navbar />
       <Switch>
-        <ProtectedRoute exact path='/' component={Dashboard} isAuthenticated={isAuthenticated}/>
+        <ProtectedRoute exact path='/' component={Dashboard} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Sign_up}/>
       </Switch>
@@ -30,10 +27,6 @@ function App({LoadUser, auth}) {
   );
 }
 
-const mapStateToprops = (state)=>{
-  return{
-    auth:state.Auth
-  }
-}
 
-export default connect(mapStateToprops,{LoadUser})(App);
+
+export default connect(null,{LoadUser})(App);

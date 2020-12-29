@@ -9,8 +9,9 @@ mongoose.connect('mongodb://localhost:27017/datastore',{
     useUnifiedTopology:true
 })
 mongoose.connection.once('open',()=>{
-    console.log('connected successful...........')
-}).on('error',()=>{
+   console.log('connected successful...........')
+})
+.on('error',()=>{
     console.log('error occur during the connection to database')
 })
 

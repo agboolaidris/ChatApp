@@ -8,7 +8,6 @@ function Navbar({ auth, logout }) {
     logout();
   };
   const { isAuthenticated, user } = auth;
-  console.log(isAuthenticated);
 
   return (
     <nav>
@@ -16,7 +15,7 @@ function Navbar({ auth, logout }) {
       {isAuthenticated ? (
         <>
           <button onClick={Logout}>Logout</button>
-          {/* <span>{user.userName ? user.userName : <h1>Guest</h1>}</span> */}
+          <span>{user.userName ? user.userName : <h1>Guest</h1>}</span>
         </>
       ) : (
         <Auth_nav />

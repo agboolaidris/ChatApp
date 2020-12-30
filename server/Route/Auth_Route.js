@@ -52,7 +52,7 @@ Route.post('/register',async(req,res)=>{
   .then( async()=>{
    await User.findOne({email:email})
    .then(result=>{
-    const token = jwt.sign({id:res._id}, process.env.JWT_SECRET)
+    const token = jwt.sign({id:result._id}, process.env.JWT_SECRET)
     res.json({
       token,
       user:{

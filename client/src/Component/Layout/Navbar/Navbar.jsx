@@ -16,7 +16,7 @@ function Navbar({ auth, logout }) {
       {isAuthenticated ? (
         <>
           <button onClick={Logout}>Logout</button>
-          <span>{user.userName && user.userName}</span>
+          {/* <span>{user.userName ? user.userName : <h1>Guest</h1>}</span> */}
         </>
       ) : (
         <Auth_nav />

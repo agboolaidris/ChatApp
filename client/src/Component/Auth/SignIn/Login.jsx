@@ -3,7 +3,7 @@ import { login } from "../../../Action/AuthAction";
 import { connect } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 
-function Login({ login, token }) {
+function Login({ login, isAuthenticated }) {
   const [state, setstate] = useState({
     email: "",
     password: "",
@@ -16,11 +16,15 @@ function Login({ login, token }) {
     });
   };
   const history = useHistory();
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push("/");
+    }
+  }, [isAuthenticated]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     login(state);
-    history.push("/");
   };
 
   return (
@@ -51,5 +55,11 @@ function Login({ login, token }) {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.Auth.isAuthenticated,
+    isloading: state.Auth.isloading,
+  };
+};
 
-export default connect(null, { login })(Login);
+export default connect(mapStateToProps, { login })(Login);

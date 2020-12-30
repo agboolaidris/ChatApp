@@ -7,9 +7,13 @@ const Auth = require('../Middleware/Auth')
 
 
 Route.get('/',Auth, async(req, res)=>{
+  console.log( 'req' +req.user)
    try {
-      User.findById(req.user)
+     await User.findById(req.user)
+     
+
     .then((user)=>{
+      console.log('user'+ user)
           res.json(user) 
         })
         .catch((err)=>{
@@ -45,8 +49,23 @@ Route.post('/register',async(req,res)=>{
      email:email
   })
  await new_user.save()
-  .then(()=>{
-     res.json({mssg:'user save!'})
+  .then( async()=>{
+   await User.findOne({email:email})
+   .then(result=>{
+    const token = jwt.sign({id:res._id}, process.env.JWT_SECRET)
+    res.json({
+      token,
+      user:{
+        email:result.email,
+        userName:result.userName
+      }
+    })
+  })
+
+  .catch(err=>{
+    console.log(err)
+  })
+  
    })
    .catch((err)=>{
       res.json({mssg:err})
@@ -109,30 +128,9 @@ Route.delete('/delete',Auth,async(req,res)=>{
 
 })
 
-Route.post('/tokenIsValid',async(req,res)=>{
- try {
-   const token = req.header('token')
-    if(!token){
-      res.json(false)
-    }
 
-    const verified = jwt.verify(token,process.env.JWT_SECRET)
-    if(!verified){
-      res.json(false)
-    }
 
-    const user = User.findById(verified.id)
-     if(!user){
-       res.json(false)
-     } 
-
-     res.json(true)
-  }
-  catch(err){
-    res.status(401).json({mssg:err.message})
-  }
-
-})
+  
 
 
 

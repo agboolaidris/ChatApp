@@ -4,12 +4,14 @@ const Auth = (req,res,next)=>{
   try {
     
      const token =  req.header('token')
+     console.log('header ' + token)
 
        if(!token){
          res.status(401).json({mssg:'no Athentication token'})
       }
 
       const verified_token = jwt.verify(token, process.env.JWT_SECRET)
+      console.log('verified '+verified_token)
       
       if(!verified_token){
      res.status(401).json({mssg:'Token verification value, authorization denied '})

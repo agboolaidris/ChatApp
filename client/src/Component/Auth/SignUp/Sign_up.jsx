@@ -7,13 +7,12 @@ import { connect } from "react-redux";
 import Validation from "./Val_SignUp";
 import { clearError } from "../../../Action/ErrorAction";
 
-function Sign_up({ Register, Error, clearError }) {
-  const history = useHistory();
+function Sign_up({ Register, Error, clearError, isAuthenticated }) {
   const { handleChange, state, handleSubmit, error } = useSignUp(
     Register,
     Validation,
     clearError,
-    history
+    isAuthenticated
   );
   const [serverError, setserverError] = useState("");
 
@@ -115,6 +114,7 @@ function Sign_up({ Register, Error, clearError }) {
 const mapStateToProps = (state) => {
   return {
     Error: state.Error,
+    isAuthenticated: state.Auth.isAuthenticated,
   };
 };
 

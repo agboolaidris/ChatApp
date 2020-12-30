@@ -1,6 +1,7 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom'
 
-const useSignUp = (SignUp, Validation,clearError, history )=>{
+const useSignUp = (SignUp, Validation,clearError,  isAuthenticated )=>{
   const [state, setstate] = useState({
       userName:'',
       email:'',
@@ -8,8 +9,8 @@ const useSignUp = (SignUp, Validation,clearError, history )=>{
       password2:''
   })
   const [error, seterror] = useState({})
-  const [boolean, setboolean] = useState(false)
-   
+  
+   const history = useHistory()
   const handleChange = (e)=>{
       clearError()
       setstate({
@@ -20,13 +21,12 @@ const useSignUp = (SignUp, Validation,clearError, history )=>{
    
   }
   useEffect(() => {
-    if(boolean){
-      if(Object.keys(error).length === 0 && error.constructor === Object){
-         SignUp(state) 
-         history.push('/') 
-       }
+   if(isAuthenticated){
+     history.push('/')
    }
-  }, [error])
+    
+
+  }, [isAuthenticated])
 
   
   
@@ -34,11 +34,7 @@ const useSignUp = (SignUp, Validation,clearError, history )=>{
   const handleSubmit = (e)=>{
       e.preventDefault()
       seterror(Validation(state))
-      setboolean(true)
-
-    
-    
-}
+      SignUp(state)}
 
   return {state,handleChange, handleSubmit,error}
 }

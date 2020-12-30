@@ -9,7 +9,7 @@ import {AUTH_ERROR,
 const initialState = {
     token:localStorage.getItem('token'),
     user:null,
-    isloading:false,
+    isloading:true,
     isAuthenticated:false
 }
 

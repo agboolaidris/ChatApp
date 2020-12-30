@@ -12,14 +12,17 @@ export const LoadUser = ()=>{
         
        if(token){
          await axios.get('http://localhost:5000/user',{headers:{token:token}})
-         .then(res=>{ console.log(res.data)
+         .then(res=>{ 
+           console.log(res)
           dispatch({type:USER_LOADED,payload:res.data})
          })
          .catch(err=>{
           dispatch(getError(err.response.data, err.response.status))
-          console.log(err)
              dispatch({type:AUTH_ERROR})
          })
+       }
+       else{
+        dispatch({type:AUTH_ERROR})
        }
 
 
@@ -35,18 +38,14 @@ export const Register = (user)=>{
     return async(dispatch)=>{
     await axios.post('http://localhost:5000/user/register', user)
      .then(async(res)=>{
-      
-      await axios.post('http://localhost:5000/user/login', user)
-      .then(res=>{
-       dispatch({type:LOGIN_SUCCESSFUL, payload:res.data})
-      })
-      .catch(err=>{
-        dispatch(getError(err.response.status, err.response.data))
-        dispatch({type:LOGIN_ERROR})
-      })
+        console.log(res)
+       dispatch({type:REGISTER_SUCCESSFUL, payload:res.data})
+    
+
      })
      .catch((err)=>{
-       dispatch(getError(err.response.data, err.response.status, 'RESGISTRATION FAIL'))
+       
+      dispatch(getError(err.response.data, err.response.status, 'RESGISTRATION FAIL'))
        dispatch({type:REGISTER_ERROR})
      })
     }

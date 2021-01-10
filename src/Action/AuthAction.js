@@ -27,7 +27,7 @@ export const checkAuth = ()=>{
 
 export const Register = (user)=>{
     return async(dispatch)=>{
-     try{ axios.post('https://iriswebsite.herokuapp.com/user/login',user)
+     try{ axios.post('https://iriswebsite.herokuapp.com/user/register',user)
       .then(res=>{
 
           dispatch({type:REGISTER_SUCCESSFUL,payload:res.data})

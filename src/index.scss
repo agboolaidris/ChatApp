@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Yellowtail&display=swap");
+
+// font-family: 'Yellowtail', cursive
+$primary: #364f6b;
+$primary2: #3fc1c9;
+$secondary: #fc5185;
+$neutral: #f5f5f5;
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  background: $neutral;
+}
+.error {
+  background: $secondary;
+  width: 80%;
+  text-align: center;
+
+  color: $neutral;
+}
+
+*,
+*::after,
+::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+@import "./Component/Auth/Login/Login";
+@import "./Component/Auth/Register/Register";
+@import "./Component/Dashboard/Dashboard";
+@import "./Component/Layout/Navbar/Navbar";

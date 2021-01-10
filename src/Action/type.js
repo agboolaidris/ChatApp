@@ -1,0 +1,10 @@
+export const USER_LOADING = 'USER_LOADING';
+export const USER_LOADED = 'USER_LOADED';
+export const USER_AUTH_ERR = 'USER_AUTH_ERR';
+export const REGISTER_SUCCESSFUL = 'REGISTER_SUCCESSFUL'
+export const REGISTER_ERROR = 'REGISTER_ERROR'
+export const GET_ERROR = 'GET_ERROR';
+export const CLEAR_ERROR = 'CLEAR_ERROR'
+export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
+export const LOGOUT = 'LOGOUT'

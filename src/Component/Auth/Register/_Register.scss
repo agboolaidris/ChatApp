@@ -67,7 +67,6 @@
       }
 
       form {
-        margin-top: 1em;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -143,6 +142,9 @@
       background: $primary;
       .div {
         width: 100%;
+        .icon {
+          color: $primary2;
+        }
         form {
           .input {
             height: 40px;

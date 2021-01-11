@@ -8,9 +8,7 @@ import {connect} from 'react-redux';
 import ProtectedRoute from './ProtectRoute'
 import Dashboard from './Component/Dashboard/Dashboard';
 function App({checkAuth,isAuthenticated}) {
-  const location = window.location.pathname
-  console.log(location)
-    useEffect(() => {
+  useEffect(() => {
         checkAuth()
     }, [])
   return (
@@ -20,7 +18,6 @@ function App({checkAuth,isAuthenticated}) {
         isAuthenticated && <Navbar />
       }  
       <Switch>
-        
       <ProtectedRoute exact path='/' component={Dashboard}/>
       <Route path='/login'  component={Login} />
       <Route path='/register'  component={Register} />

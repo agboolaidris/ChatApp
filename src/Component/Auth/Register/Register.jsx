@@ -1,10 +1,14 @@
 import React from "react";
 import Left_page from "./Left_page";
 import Right_page from "./Right_page";
+import { connect } from "react-redux";
 
-function Register() {
+function Register({ isloading }) {
   return (
     <div className="register">
+      <div className={isloading ? "loading" : "loading-none"}>
+        <span></span>
+      </div>
       <div className="col-1">
         <Left_page />
       </div>
@@ -14,5 +18,10 @@ function Register() {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    isloading: state.Auth.isLoading,
+  };
+};
 
-export default Register;
+export default connect(mapStateToProps)(Register);

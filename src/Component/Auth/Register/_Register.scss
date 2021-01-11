@@ -1,5 +1,6 @@
 .register {
   margin: 5vh 5%;
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   height: 90vh;
@@ -43,7 +44,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+
     .div {
       width: 70%;
       display: flex;

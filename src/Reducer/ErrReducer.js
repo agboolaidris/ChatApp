@@ -10,8 +10,8 @@ const ErrorReducer = (state=initialState,action )=>{
         case GET_ERROR :
              return {
                  ...state,
-                 msg:action.payload.data.msg,
-                 status:action.payload.status,
+                 msg:action.payload && action.payload.data.msg,
+                 status: action.payload && action.payload.status,
                  id:action.id
              } 
             break;

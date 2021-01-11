@@ -27,6 +27,7 @@ export const checkAuth = ()=>{
 
 export const Register = (user)=>{
     return async(dispatch)=>{
+        dispatch({type:USER_LOADING})
      try{ axios.post('https://iriswebsite.herokuapp.com/user/register',user)
       .then(res=>{
 
@@ -34,12 +35,12 @@ export const Register = (user)=>{
         
       })
       .catch(err=>{
+          console.log(err)
           dispatch({type:REGISTER_ERROR})
           dispatch(getError(err.response,'REGISTERATION FAIL'))
       })       
     }
     catch(err){
-        console.log(err.message)
     } 
    }
 }

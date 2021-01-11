@@ -21,6 +21,38 @@ html {
   color: $neutral;
 }
 
+.loading {
+  position: absolute;
+  width: 100%;
+  opacity: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  span {
+    animation: div 2s ease-in-out;
+    animation-iteration-count: infinite;
+    background: #fc5185;
+  }
+
+  @keyframes div {
+    0% {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+
+    100% {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+  }
+}
+.loading-none {
+  display: none;
+}
+
 *,
 *::after,
 ::before {

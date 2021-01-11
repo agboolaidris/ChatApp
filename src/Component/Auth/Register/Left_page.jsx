@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Left_page() {
   return (
     <div>
-      <h1>Welcome Back!</h1>
+      <h1>Welcome!</h1>
       <p>To keep connected with us pls login with your personal info</p>
       <button>
         <Link to="/login">SIGN IN</Link>

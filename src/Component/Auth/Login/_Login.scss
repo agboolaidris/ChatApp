@@ -139,10 +139,13 @@
     margin: 0;
 
     .col-1 {
-      background: darken($color: $neutral, $amount: 10);
+      background: $primary;
 
       .div {
         width: 100%;
+        .icon {
+          color: $primary2;
+        }
 
         form {
           .input {
@@ -151,11 +154,15 @@
               height: 40px;
             }
           }
+          button {
+            background: $primary2;
+          }
 
           .register-link {
             display: block;
             text-align: left;
             width: 80%;
+            color: $neutral;
             a {
               text-decoration: none;
               color: $secondary;

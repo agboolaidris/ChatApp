@@ -42,7 +42,7 @@ function Left_Page({ clearError, Login, error, isAuthenticated }) {
           </label>
           <input
             type="email"
-            placeholder="Email"
+            placeholder="email"
             onChange={handleChange}
             value={state.email}
             id="email"

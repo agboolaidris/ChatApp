@@ -46,14 +46,15 @@ export const Register = (user)=>{
 }
 export const Login = (user)=>{
     return async(dispatch)=>{
+        dispatch({type:USER_LOADING})
      try{ axios.post('https://iriswebsite.herokuapp.com/user/login',user)
       .then(res=>{
-          console.log(res)
+        
         dispatch({type:LOGIN_SUCCESSFUL,payload:res.data})
         
       })
       .catch(err=>{
-          console.log(err.response)
+        
           dispatch({type:LOGIN_ERROR})
           dispatch(getError(err.response,'LOGIN FAIL'))
       })       

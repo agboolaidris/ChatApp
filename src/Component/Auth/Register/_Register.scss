@@ -140,6 +140,7 @@
       display: none;
     }
     .col-2 {
+      background: $primary;
       .div {
         width: 100%;
         form {
@@ -150,10 +151,15 @@
             }
           }
 
+          .check {
+            color: $neutral;
+          }
+
           .login-link {
             display: block;
             text-align: left;
             width: 80%;
+            color: $neutral;
             a {
               text-decoration: none;
               color: $secondary;

@@ -33,7 +33,7 @@ function Left_Page({ clearError, Login, error, isAuthenticated }) {
           <FontAwesomeIcon icon={faTwitterSquare} size="2x" />
         </a>
       </div>
-      <p> or use your email for registration</p>
+      <p> or use your email for Login</p>
       <form onSubmit={handleSubmit}>
         <span className="error">{Error && Error}</span>
         <div className="input">

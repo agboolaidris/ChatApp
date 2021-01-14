@@ -20,7 +20,7 @@ export const checkAuth = ()=>{
         dispatch({type:USER_LOADING})
         const token = getState().Auth.token
         if(token){
-           axios.get('https://iriswebsite.herokuapp.com/user',{headers:{'x-auth-token':token}})
+           axios.get('https://iriswebsite.herokuapp.com/private',{headers:{'x-auth-token':token}})
            .then(res=>{
                dispatch({type:USER_LOADED, payload:res.data})
             })
@@ -86,11 +86,11 @@ export const Logout = ()=>{
 }
 
 export const forgetpassword = (email)=>{
-    console.log(email)
+    
    return async(dispatch)=>{
       dispatch({type:USER_LOADING})
      try{ 
-       axios.post('http://localhost:5000/user/forgetpassword',email)
+     axios.post('https://iriswebsite.herokuapp.com/user/forgetpassword',email)
       .then(res=>{
           
           dispatch({type:FORGET_PASSWORD_SUCCESSFUL})

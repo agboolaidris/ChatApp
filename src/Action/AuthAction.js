@@ -70,3 +70,20 @@ export const Logout = ()=>{
       dispatch({type:LOGOUT})
     }
 }
+
+export const forgetpassword = (email)=>{
+   return async(dispatch)=>{
+     try{ dispatch({type:USER_LOADING})
+      axios.post('http://localhost:5000/user/forgetpassword',email)
+      .then(res=>{
+          console.log(res)
+      })
+      .catch(err=>{
+          console.log(err)
+      })
+    }
+    catch(err){
+      console.log(err.message)
+    }
+   }
+}

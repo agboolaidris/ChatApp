@@ -87,12 +87,14 @@
         }
         .link {
           width: 80%;
+
           .register-link {
             display: none;
           }
           .forgetpassword-link {
-            background: rgb(155, 155, 121);
-            padding-top: 2em;
+            margin-top: 1em;
+            display: block;
+
             a {
               color: $secondary;
               text-decoration: none;

@@ -85,8 +85,23 @@
         button:hover {
           background: $secondary;
         }
-        .register-link {
-          display: none;
+        .link {
+          width: 80%;
+          .register-link {
+            display: none;
+          }
+          .forgetpassword-link {
+            background: rgb(155, 155, 121);
+            padding-top: 2em;
+            a {
+              color: $secondary;
+              text-decoration: none;
+            }
+            a:hover,
+            a:focus {
+              color: $primary;
+            }
+          }
         }
       }
     }
@@ -159,21 +174,22 @@
           button {
             background: $primary2;
           }
+          .link {
+            .register-link {
+              display: block;
+              text-align: left;
+              width: 100%;
+              color: $neutral;
+              a {
+                text-decoration: none;
+                color: $secondary;
+                font-weight: bolder;
+                margin-left: 1em;
+              }
 
-          .register-link {
-            display: block;
-            text-align: left;
-            width: 80%;
-            color: $neutral;
-            a {
-              text-decoration: none;
-              color: $secondary;
-              font-weight: bolder;
-              margin-left: 1em;
-            }
-
-            a:hover {
-              color: $primary;
+              a:hover {
+                color: $primary;
+              }
             }
           }
         }

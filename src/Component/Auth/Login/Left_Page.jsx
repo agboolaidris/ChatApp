@@ -62,9 +62,12 @@ function Left_Page({ clearError, Login, error, isAuthenticated }) {
         </div>
 
         <button>LOG IN</button>
-        <div className="register-link">
-          <span>
+        <div className="link">
+          <span className="register-link">
             don't have an account <Link to="/register">Register</Link>
+          </span>
+          <span className="forgetpassword-link">
+            forget password ? <Link to="/forgetpassword">Click Me</Link>
           </span>
         </div>
       </form>

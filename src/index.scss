@@ -24,7 +24,7 @@ html {
 .loading {
   position: absolute;
   width: 100%;
-  opacity: 10;
+  opacity: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +54,7 @@ html {
 }
 
 .loading-opacity {
-  opacity: 0.3;
+  opacity: 0;
 }
 
 *,

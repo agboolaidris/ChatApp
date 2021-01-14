@@ -47,7 +47,8 @@ export const Register = (user)=>{
 export const Login = (user)=>{
     return async(dispatch)=>{
         dispatch({type:USER_LOADING})
-     try{ axios.post('https://iriswebsite.herokuapp.com/user/login',user)
+     try{ 
+        axios.post('https://iriswebsite.herokuapp.com/user/login',user)
       .then(res=>{
         
         dispatch({type:LOGIN_SUCCESSFUL,payload:res.data})
@@ -72,18 +73,20 @@ export const Logout = ()=>{
 }
 
 export const forgetpassword = (email)=>{
+    console.log(email)
    return async(dispatch)=>{
-     try{ dispatch({type:USER_LOADING})
-      axios.post('http://localhost:5000/user/forgetpassword',email)
+      dispatch({type:USER_LOADING})
+     try{ 
+       axios.post('http://localhost:5000/user/forgetpassword',email)
       .then(res=>{
           console.log(res)
       })
       .catch(err=>{
-          console.log(err)
+          console.log(err.response.data)
       })
     }
     catch(err){
-      console.log(err.message)
+      console.log(err.response.message)
     }
    }
 }

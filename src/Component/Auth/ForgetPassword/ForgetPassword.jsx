@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { forgetpassword } from "../../../Action/AuthAction";
+import { connect } from "react-redux";
 
-function ForgetPassword() {
+function ForgetPassword({ forgetpassword }) {
   const [state, setstate] = useState({
     email: "",
   });
@@ -38,4 +39,4 @@ function ForgetPassword() {
   );
 }
 
-export default ForgetPassword;
+export default connect(null, { forgetpassword })(ForgetPassword);

@@ -1,6 +1,19 @@
-import {USER_LOADED,LOGOUT,USER_LOADING,USER_AUTH_ERR, REGISTER_SUCCESSFUL,REGISTER_ERROR,LOGIN_ERROR,LOGIN_SUCCESSFUL} from './type' 
+import {USER_LOADED,
+    LOGOUT,
+    USER_LOADING,
+    USER_AUTH_ERR,
+     REGISTER_SUCCESSFUL,
+     REGISTER_ERROR,
+     LOGIN_ERROR,
+     LOGIN_SUCCESSFUL,
+     FORGET_PASSWORD_ERROR,
+     FORGET_PASSWORD_SUCCESSFUL
+    } from './type' 
 import axios from 'axios'
 import {getError} from './ErrorAction'
+import {getSuccess} from './SuccessfulAction'
+
+
 export const checkAuth = ()=>{
     return async(dispatch, getState)=>{
        try{ 
@@ -79,10 +92,14 @@ export const forgetpassword = (email)=>{
      try{ 
        axios.post('http://localhost:5000/user/forgetpassword',email)
       .then(res=>{
-          console.log(res)
+          
+          dispatch({type:FORGET_PASSWORD_SUCCESSFUL})
+          dispatch(getSuccess(res, 'FORGET PASSWORD SUCCESSFUL'))
       })
       .catch(err=>{
-          console.log(err.response.data)
+          dispatch(getError(err.response,'FORGET PASSWORD FAIL'))
+          dispatch({type:FORGET_PASSWORD_ERROR})
+    
       })
     }
     catch(err){

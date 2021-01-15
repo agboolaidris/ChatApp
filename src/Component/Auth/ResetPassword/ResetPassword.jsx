@@ -69,8 +69,12 @@ function RestPassword({
           <span className={Err ? "error" : success && "success"}>
             {Err
               ? Err
-              : success &&
-                `${success} ${(<Link to="/login">Login</Link>)} `}{" "}
+              : success && (
+                  <span>
+                    {success}
+                    <Link to="/login">Login</Link>{" "}
+                  </span>
+                )}
             <span
               onClick={handleClick}
               className={times ? "times" : "times-none"}

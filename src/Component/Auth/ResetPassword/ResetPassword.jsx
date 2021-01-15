@@ -14,6 +14,7 @@ function RestPassword({
   Success,
   clearError,
   clearSuccess,
+  match,
 }) {
   const [state, setstate] = useState({
     password: "",
@@ -23,6 +24,7 @@ function RestPassword({
   const [Err, setErr] = useState("");
   const [success, setsuccess] = useState("");
   const [times, settimes] = useState(false);
+  const params = match.params.id;
 
   useEffect(() => {
     if (Error.id === "PASSWORD RESET ERROR") {
@@ -46,7 +48,7 @@ function RestPassword({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    resetpassword(state);
+    resetpassword(params, state);
   };
   const handleClick = () => {
     clearError();

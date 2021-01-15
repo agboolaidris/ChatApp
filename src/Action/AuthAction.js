@@ -50,7 +50,6 @@ export const Register = (user)=>{
         
       })
       .catch(err=>{
-          console.log(err)
           dispatch({type:REGISTER_ERROR})
           dispatch(getError(err.response,'REGISTERATION FAIL'))
       })       
@@ -110,12 +109,12 @@ export const forgetpassword = (email)=>{
    }
 }
 
-export const resetpassword = (state)=>{
+export const resetpassword = (params,state)=>{
     console.log(state)
     return async(dispatch)=>{
         dispatch({type:USER_LOADING})
         try{
-            axios.put('https://iriswebsite.herokuapp.com/user/resetpassword/',state)
+            axios.put(`https://iriswebsite.herokuapp.com/user/resetpassword/${params}`,state)
             .then(res=>{
                 dispatch(getSuccess(res, 'PASSWORD RESET SUCCESS'))
                 console.log(res)

@@ -67,7 +67,14 @@ function RestPassword({
       >
         <form onSubmit={handleSubmit}>
           <span className={Err ? "error" : success && "success"}>
-            {Err ? Err : success && success}{" "}
+            {Err
+              ? Err
+              : success &&
+                `${success} ${(
+                  <a href="https://irisblogs.herokuapp.com">
+                    Click me to Login
+                  </a>
+                )} `}{" "}
             <span
               onClick={handleClick}
               className={times ? "times" : "times-none"}
@@ -78,8 +85,8 @@ function RestPassword({
           <div className="text">
             <h2>Reset Password</h2>
             <p>
-              Pls! enter the email address you register your account with, we
-              will send the reset password confirmation to this email
+              Pls! enter your new password for your account. Note!!! that you
+              will not able to login with your previous password anymore.
             </p>
           </div>
           <div className="div">

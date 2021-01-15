@@ -35,7 +35,7 @@ export const checkAuth = ()=>{
         }
     }
     catch(err){
-        console.log(err.message)
+        dispatch({type:USER_AUTH_ERR})
     }
     }
 }
@@ -69,13 +69,12 @@ export const Login = (user)=>{
         
       })
       .catch(err=>{
-        
           dispatch({type:LOGIN_ERROR})
           dispatch(getError(err.response,'LOGIN FAIL'))
       })       
     }
     catch(err){
-        console.log(err.message)
+        dispatch({type:LOGIN_ERROR})
     } 
    }
 }
@@ -93,7 +92,6 @@ export const forgetpassword = (email)=>{
      try{ 
      axios.post('https://iriswebsite.herokuapp.com/user/forgetpassword',email)
       .then(res=>{
-          
           dispatch({type:FORGET_PASSWORD_SUCCESSFUL})
           dispatch(getSuccess(res, 'FORGET PASSWORD SUCCESSFUL'))
       })
@@ -110,7 +108,6 @@ export const forgetpassword = (email)=>{
 }
 
 export const resetpassword = (params,state)=>{
-    console.log(state)
     return async(dispatch)=>{
         dispatch({type:USER_LOADING})
         try{
@@ -118,11 +115,9 @@ export const resetpassword = (params,state)=>{
             .then(res=>{
                 dispatch(getSuccess(res, 'PASSWORD RESET SUCCESS'))
                 dispatch({type:RESETPASSWORD_SUCCESS})
-                console.log(res)
             })
 
             .catch(err=>{
-                console.log(err.response)
                 dispatch({type:RESETPASSWORD_ERROR})
                 dispatch(getError(err.response, 'PASSWORD RESET ERROR'))
             })

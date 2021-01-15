@@ -117,6 +117,7 @@ export const resetpassword = (params,state)=>{
             axios.put(`https://iriswebsite.herokuapp.com/user/resetpassword/${params}`,state)
             .then(res=>{
                 dispatch(getSuccess(res, 'PASSWORD RESET SUCCESS'))
+                dispatch({type:RESETPASSWORD_SUCCESS})
                 console.log(res)
             })
 

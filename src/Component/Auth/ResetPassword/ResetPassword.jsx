@@ -35,7 +35,7 @@ function RestPassword({
   }, [Error]);
 
   useEffect(() => {
-    if (Success.id === "PASSWORD REST SUCCESS") {
+    if (Success.id === "PASSWORD RESET SUCCESS") {
       setsuccess(Success.msg);
       settimes(true);
     } else {

@@ -7,7 +7,9 @@ import {USER_LOADING,
     LOGIN_SUCCESSFUL, 
     LOGOUT,
     FORGET_PASSWORD_ERROR,
-    FORGET_PASSWORD_SUCCESSFUL
+    FORGET_PASSWORD_SUCCESSFUL,
+    RESETPASSWORD_SUCCESS,
+    RESETPASSWORD_ERROR
 
 } from '../Action/type'
 
@@ -49,14 +51,18 @@ const AuthReducer = (state=initialState,action)=>{
                  
              }
              break;
-          case FORGET_PASSWORD_SUCCESSFUL:
+          
+         case FORGET_PASSWORD_SUCCESSFUL:
+         case RESETPASSWORD_SUCCESS:    
               return{
                   ...state,
                   isLoading:false
                 }
               break;   
+          
           case USER_AUTH_ERR:
-          case FORGET_PASSWORD_ERROR:   
+          case FORGET_PASSWORD_ERROR: 
+          case RESETPASSWORD_ERROR:  
           case REGISTER_ERROR: 
           case LOGIN_ERROR:
           case LOGOUT:       

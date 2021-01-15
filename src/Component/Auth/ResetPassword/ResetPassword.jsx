@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faKey } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { forgetpassword } from "../../../Action/AuthAction";
+import { resetpassword } from "../../../Action/AuthAction";
 import { connect } from "react-redux";
 import { clearError } from "../../../Action/ErrorAction";
 import { clearSuccess } from "../../../Action/SuccessfulAction";
 
 function RestPassword({
-  forgetpassword,
+  resetpassword,
   isLoading,
   Error,
   Success,
@@ -17,7 +17,7 @@ function RestPassword({
 }) {
   const [state, setstate] = useState({
     password: "",
-    passwords: "",
+    password2: "",
   });
 
   const [Err, setErr] = useState("");
@@ -25,7 +25,7 @@ function RestPassword({
   const [times, settimes] = useState(false);
 
   useEffect(() => {
-    if (Error.id === "FORGET PASSWORD FAIL") {
+    if (Error.id === "PASSWORD RESET ERROR") {
       setErr(Error.msg);
       settimes(true);
     } else {
@@ -35,7 +35,7 @@ function RestPassword({
   }, [Error]);
 
   useEffect(() => {
-    if (Success.id === "FORGET PASSWORD SUCCESSFUL") {
+    if (Success.id === "PASSWORD REST SUCCESS") {
       setsuccess(Success.msg);
       settimes(true);
     } else {
@@ -46,7 +46,7 @@ function RestPassword({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    forgetpassword(state);
+    resetpassword(state);
   };
   const handleClick = () => {
     clearError();
@@ -60,7 +60,7 @@ function RestPassword({
       </div>
       <div
         className={
-          isLoading ? "forgetpassword loading-opacity " : "forgetpassword"
+          isLoading ? "resetpassword loading-opacity " : "resetpassword"
         }
       >
         <form onSubmit={handleSubmit}>
@@ -85,10 +85,10 @@ function RestPassword({
               <FontAwesomeIcon icon={faKey} />
             </label>
             <input
-              type="email"
+              type="password"
               placeholder="enter your new password"
-              value={state.email}
-              onChange={(e) => setstate({ ...state, email: e.target.value })}
+              value={state.password}
+              onChange={(e) => setstate({ ...state, password: e.target.value })}
             />
           </div>
           <div className="div">
@@ -96,10 +96,12 @@ function RestPassword({
               <FontAwesomeIcon icon={faKey} />
             </label>
             <input
-              type="email"
+              type="password"
               placeholder="confirm your new password"
-              value={state.email}
-              onChange={(e) => setstate({ ...state, email: e.target.value })}
+              value={state.passwords}
+              onChange={(e) =>
+                setstate({ ...state, password2: e.target.value })
+              }
             />
           </div>
           <button>Submit</button>
@@ -122,7 +124,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  forgetpassword,
+  resetpassword,
   clearSuccess,
   clearError,
 })(RestPassword);

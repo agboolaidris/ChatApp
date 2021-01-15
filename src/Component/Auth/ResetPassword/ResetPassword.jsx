@@ -70,11 +70,7 @@ function RestPassword({
             {Err
               ? Err
               : success &&
-                `${success} ${(
-                  <a href="https://irisblogs.herokuapp.com">
-                    Click me to Login
-                  </a>
-                )} `}{" "}
+                `${success} ${(<Link to="/login">Login</Link>)} `}{" "}
             <span
               onClick={handleClick}
               className={times ? "times" : "times-none"}
@@ -114,10 +110,6 @@ function RestPassword({
             />
           </div>
           <button>Submit</button>
-
-          <span>
-            Login here <Link to="login">Click</Link>
-          </span>
         </form>
       </div>
     </>

@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './App';
-import {Provider} from 'react-redux'
-import Store from './Store'
+const { ApolloServer, gql } = require("apollo-server");
+const Post = require("./model/post");
+const typeDefs = require("./graphql/typeDefs");
+//db
+require("./db/mongose");
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={Store}>
-    <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const resolver = {
+  Query: {
+    getAllPost: async () => {
+      try {
+        const post = await Post.find();
+        return post;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+  },
+};
 
+const server = new ApolloServer({ typeDefs, resolver });
 
+server.listen({ port: 5000 }).then((res) => {
+  console.log(`server running on ${res.url}`);
+});

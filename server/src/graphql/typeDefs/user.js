@@ -5,7 +5,8 @@ export default gql`
   }
 
   type Mutation {
-    createUser(inputUser: InputUser): User!
+    createUser(inputUser: InputUser!): User!
+    fileUploader(file: Upload!): String!
   }
 
   input InputUser {
@@ -16,12 +17,12 @@ export default gql`
   }
 
   type User {
-    uuid: ID!
+    _id: ID!
     username: String!
     email: String!
     password: String!
     avater: String
-    created_at: String!
+    created_at: String
     update_at: String
   }
 `;

@@ -3,19 +3,23 @@
   "version": "1.0.0",
   "description": "graphql crud app",
   "main": "index.js",
+  "resolutions": {
+    "fs-capacitor": "^6.2.0",
+    "graphql-upload": "^11.0.0"
+  },
   "scripts": {
-    "start": "node -r esm .",
-    "dev": "nodemon -r esm"
+    "preinstall": "npx npm-force-resolutions",
+    "start": "node -r esm",
+    "dev": "nodemon -r esm ."
   },
   "keywords": [],
-  "author": "Idris Agboola",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^2.22.2",
+    "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "graphql": "^15.5.0",
-    "mysql2": "^2.2.5",
-    "typeorm": "^0.2.32"
+    "mongoose": "^5.12.3"
   }
 }

@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "graphql crud app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r esm .",
+    "dev": "nodemon -r esm"
+  },
+  "keywords": [],
+  "author": "Idris Agboola",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^2.22.2",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "mysql2": "^2.2.5",
+    "typeorm": "^0.2.32"
+  }
+}

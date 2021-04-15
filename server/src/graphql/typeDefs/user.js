@@ -2,10 +2,11 @@ import { gql } from "apollo-server-express";
 export default gql`
   type Query {
     getAllUser: [User!]!
+    login(username: String!, password: String!): AuthRes!
   }
 
   type Mutation {
-    createUser(inputUser: InputUser!): User!
+    register(inputUser: InputUser!): AuthRes!
     fileUploader(file: Upload!): String!
   }
 
@@ -20,9 +21,13 @@ export default gql`
     _id: ID!
     username: String!
     email: String!
-    password: String!
     avater: String
     created_at: String
     update_at: String
+  }
+
+  type AuthRes {
+    token: String!
+    user: User!
   }
 `;

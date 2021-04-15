@@ -8,7 +8,7 @@ import { Sign } from "../../helpers/jwt";
 export default {
   Query: {
     login: async (_, { username, password }, context) => {
-      console.log(context);
+      console.log(context.res);
       try {
         //check if username is exist
         const user = await User.findOne({ username });

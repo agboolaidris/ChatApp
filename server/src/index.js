@@ -5,26 +5,50 @@ import mongoose from "mongoose";
 import { resolvers, typeDefs } from "./graphql/index.js";
 import { DB_URL } from "./config/config.js";
 import AuthMiddleware from "./middleware/auth.js";
+import { default as cookieParser } from "cookie-parser";
+import { default as cors } from "cors";
 
 //initialize express application
 const app = express();
 
 const PORT = process.env.PORT || 5000;
 
+//static files
+app.use(express.static(join(__dirname, "./uploads")));
+
+app.use(
+  cors({
+    credentials: true,
+    exposedHeaders: ["access-token"],
+  })
+);
+
+//set cookie
+app.use(cookieParser());
+
+//authMiddleware
+app.use(AuthMiddleware);
+
 const server = new ApolloServer({
+  introspection: true,
   typeDefs,
   resolvers,
+  formatError: (error) => {
+    const message = error.message
+      .replace("SequelizeValidationError: ", "")
+      .replace("Validation error: ", "");
+
+    return {
+      ...error,
+      message,
+    };
+  },
+
   context: ({ req, res }) => {
     return { req, res };
   },
   playground: true,
 });
-
-//static files
-app.use(express.static(join(__dirname, "./uploads")));
-
-//authMiddleware
-app.use(AuthMiddleware);
 
 const startApp = async () => {
   try {

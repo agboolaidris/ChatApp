@@ -1,5 +1,5 @@
 const AuthMiddleware = async (req, res, next) => {
-  ///console.log(req);
+  console.log(res.cookie);
   return next();
 };
 

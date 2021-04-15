@@ -7,8 +7,7 @@ import { Sign } from "../../helpers/jwt";
 
 export default {
   Query: {
-    login: async (_, { username, password }, context) => {
-      console.log(context.res);
+    login: async (_, { username, password }, { res }) => {
       try {
         //check if username is exist
         const user = await User.findOne({ username });
@@ -21,6 +20,8 @@ export default {
         //generate token
         const token = await Sign(user);
 
+        res.cookie("access-token", token, { httpOnly: true });
+        console.log(res.cookie);
         return {
           token: `Bearer ${token}`,
           user,
